@@ -122,7 +122,7 @@ static jboolean get_hermetic_jdk_arg(char* arg) {
             if (read_u8(execfile, little_endian, &jimage_offset)) {
                 fclose(execfile);
 
-                jimage_len = end_pos - jimage_offset;
+                jimage_len = (long)(end_pos - jimage_offset);
                 sprintf(arg, "-XX:UseHermeticJDK=%s,%lld,%ld",
                         execname, jimage_offset, jimage_len);
                 return JNI_TRUE;
@@ -165,7 +165,7 @@ main(int argc, char **argv)
 
     JLI_InitArgProcessing(jargc > 0, const_disable_argfile);
 
-    char hermetic_jdk_arg[PATH_MAX+100];
+    char hermetic_jdk_arg[MAX_PATH+100];
     jboolean is_hermetic = get_hermetic_jdk_arg(hermetic_jdk_arg);
 
 #ifdef _WIN32
