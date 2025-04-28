@@ -37,7 +37,7 @@
 #include <limits.h>
 
 // Windows doesn't have PATH_MAX. It's MAX_PATH instead.
-#if defined(_WINDOWS)
+#ifdef _WIN32
 #ifndef PATH_MAX
 #define PATH_MAX MAX_PATH
 #endif
